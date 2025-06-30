@@ -1,9 +1,25 @@
 // Arquivo onde faremos a conexão com o banco
-import { knex as setupKnex } from "knex"
+import { knex as setupKnex, Knex } from "knex"
+import 'dotenv/config'
 
-export const knex = setupKnex({
-    client: 'sqlite',
-    connection: {
-        filename: './tmp/app.db'
-    }
-})
+console.log(process.env)
+
+if(!process.env.DATABASE_URL){
+  throw new Error('Database_URL env not found')
+}
+
+export const config: Knex.Config = {
+  client: "sqlite",
+  connection: {
+    filename: process.env.DATABASE_URL,
+  },
+  useNullAsDefault: true,
+  migrations: {
+    extension: 'ts',
+    directory: './db/migrations'
+  }
+
+};
+
+export const knex = setupKnex(config)
+    
