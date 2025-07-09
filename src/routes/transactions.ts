@@ -6,6 +6,7 @@ import { checkSessionIdExists } from "../middlewares/checkSessionIdExists"
 
 
 export async function transactionRoutes(app: FastifyInstance) {
+    
     app.get(
       "/",
       { preHandler: [checkSessionIdExists] },
