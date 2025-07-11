@@ -1,8 +1,6 @@
 import { config } from "dotenv"
 import { z } from "zod"
 
-console.log(process.env)
-
 if(process.env.NODE_ENV === 'test'){
     config({path:'.env.test'})
 }else{
